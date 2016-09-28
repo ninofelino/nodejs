@@ -1,0 +1,8 @@
+[
+{"fieldname":"Custumer","type":"text","id":"ad_custumer","readonly":"false","size":"40"},
+{"fieldname":"Reference","type":"text","id":"ad_custumer"},
+{"fieldname":"DeliveryDate","type":"date","id":"ad_custumer"},
+{"fieldname":"Custumer","type":"text","id":"ad_custumer"},
+{"fieldname":"Custumer","type":"text","id":"ad_custumer"}
+
+]

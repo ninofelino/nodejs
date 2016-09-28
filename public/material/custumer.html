@@ -1,0 +1,10 @@
+<div layout="row" layout-wrap>
+  <div flex="50" ng-repeat="item in related">
+    
+       <md-input-container> 
+      <label>{{item.name}}{{item.id}}</label><input ng-model="user.title" type="{{item.type}}">
+      </md-input-container>
+        
+  </div>
+ /div>
+

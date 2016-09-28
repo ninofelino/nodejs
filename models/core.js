@@ -1,0 +1,1 @@
+list_view='SELECT viewname FROM pg_views WHERE schemaname NOT IN('information_schema', 'pg_catalog')';

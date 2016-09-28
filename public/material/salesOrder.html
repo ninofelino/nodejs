@@ -1,0 +1,124 @@
+<script>
+ (function(angular, undefined){
+  "use strict";
+
+  angular
+   .module('demoApp', ['ngMaterial'])
+   .controller('AppCtrl', AppController);
+
+  function AppController($scope, $mdDialog) {
+    var alert;
+    $scope.showAlert = showAlert;
+    $scope.showDialog = showDialog;
+    $scope.items = [1, 2, 3];
+
+    // Internal method
+    function showAlert() {
+      alert = $mdDialog.alert({
+        title: 'Attention',
+        textContent: 'This iXXXXXXs an example of how easy dialogs can be!',
+        ok: 'Close'
+      });
+
+      $mdDialog
+        .show( alert )
+        .finally(function() {
+          alert = undefined;
+        });
+    }
+
+    function showDialog($event) {
+       var parentEl = angular.element(document.body);
+       $mdDialog.show({
+         parent: parentEl,
+         targetEvent: $event,
+         template:
+           '<md-dialog aria-label="List dialog">' +
+           '  <md-dialog-content>'+
+           '    <md-list>'+
+           '      <md-list-item ng-repeat="item in items">'+
+           '       <p>Number {{item}}</p>' +
+           '      '+
+           '    </md-list-item></md-list>'+
+           '  </md-dialog-content>' +
+           '  <md-dialog-actions>' +
+           '    <md-button ng-click="closeDialog()" class="md-primary">' +
+           '      Close Dialog' +
+           '    </md-button>' +
+           '  </md-dialog-actions>' +
+           '</md-dialog>',
+         locals: {
+           items: $scope.items
+         },
+         controller: DialogController
+      });
+      function DialogController($scope, $mdDialog, items) {
+        $scope.items = items;
+        $scope.closeDialog = function() {
+          $mdDialog.hide();
+        }
+      }
+    }
+  }
+})(angular);
+  </script>
+<div ng-cloak>
+  <md-content>
+    <md-fab-toolbar md-open="demo.isOpen" count="demo.count"
+                  md-direction="{{demo.selectedDirection}}">
+    <md-fab-trigger class="align-with-text">
+      <md-button aria-label="menu" class="md-fab md-primary">
+        <md-icon md-svg-src="../svg/ic_menu_black_24px.svg"></md-icon>
+      </md-button>
+    </md-fab-trigger>
+
+    <md-toolbar>
+      <md-fab-actions class="md-toolbar-tools">
+        <md-button aria-label="comment" class="md-icon-button">
+          <md-icon md-svg-src="../svg/ic_print_black_24px.svg"></md-icon>
+        </md-button>
+        <md-button aria-label="label" class="md-icon-button">
+          <md-icon md-svg-src="../svg/ic_print_black_24px.svg"></md-icon>
+        </md-button>
+        <md-button aria-label="photo" class="md-icon-button">
+          <md-icon md-svg-src="img/icons/ic_photo_24px.svg"></md-icon>
+        </md-button>
+      </md-fab-actions>
+    </md-toolbar>
+  </md-fab-toolbar>
+
+    <md-tabs md-dynamic-height md-border-bottom>
+      <md-tab label="New">
+             <md-button ng-click="showAlert()" class="md-raised md-warn">
+      Employee Alert!
+      </md-button>
+            <md-button class="md-raised md-primary">New</md-button>
+            <md-button  ng-click="showAlert()" >Save</md-button>
+            <md-button  ng-click="showDialog($event)"  class="md-raised md-primary">Search</md-button>
+            <md-button class="md-raised md-primary">Print</md-button>
+            
+            
+      <md-content>
+          <div layout='row' layout-wrap>
+          <md-input-container ng-repeat="item in related " flex='50' class="md-block">
+          <label>{{item.fieldname}}</label><input ng-model="user.title" type="{{item.type}}">
+          </md-input-container>      
+          </div>
+      </md-content>
+      </md-tab>
+      <md-tab label="two">
+        <md-content class="md-padding">
+  </md-content>
+
+          <h1 class="md-display-2">Tab Two</h1>
+            </md-content>
+      </md-tab>
+      <md-tab label="three">
+        <md-content class="md-padding">
+          <h1 class="md-display-2">Tab Three</h1>
+         
+        </md-content>
+      </md-tab>
+    </md-tabs>
+  </md-content>
+</div>

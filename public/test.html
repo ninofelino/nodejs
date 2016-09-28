@@ -1,0 +1,97 @@
+
+<!DOCTYPE html>
+<html ng-app="demoApp">
+<head>
+<title>Node.js Getting Started on Heroku</title>
+<link rel="stylesheet" href="lib/angular-material.min.css">
+<script src="lib/angular.min.js"></script>
+<script src="lib/angular-animate.min.js"></script>
+<script src="lib/angular-aria.min.js"></script>
+<!-- Angular Material Javascript now available via Google CDN; version 1.0.7 used here -->
+<script src="lib/angular-material.min.js"></script>
+<link rel="stylesheet" href="lib/icon.css">
+<link rel="stylesheet" href="lib/angular-material.min.css">
+<script src="lib/angular-ui-router.js"></script>
+<script src="lib/angular-resource.min.js"></script>
+</head>
+ <script type="text/ng-template" id="/view2.tpl"> 
+      <h2>TempLATEB2</h2>
+      {{title}}
+</script>
+ <script type="text/ng-template" id="view1.html"> 
+      <h2>TempLATE vIEW1</h2>
+</script>
+<script>
+
+angular.module('demoApp', ['ngMaterial','ui.router','ngResource'])
+.config(function($stateProvider,$urlRouterProvider){
+    $stateProvider
+    .state('view1',{url:"view1",templateUrl:'view1.html'})
+    .state('view2',{templateUrl:'/view2.tpl',
+                   controller: function($scope){
+                               $scope.title='this template 2';
+                   }
+})
+})
+.controller('AppCtrl',
+function($scope,$mdSidenav){
+    
+    $scope.menus=[
+    {"menu":"Bussines Partner","type":"toogle","url":"view1"},
+    {"menu":"Customer","type":"link","url":"view1"},
+    {"menu":"Product","type":"link","url":"view2"} 
+    ];})
+
+
+;
+
+</script>
+
+
+<body>
+
+<div ng-app="demoApp">
+
+<div ng-controller="AppCtrl">
+    {{menu}}
+
+
+<section layout="row" flex>
+
+    
+    <md-sidenav class="md-sidenav-left"
+       md-component-id="left"
+        md-is-locked-open="true"
+        md-whiteframe="4">
+        <md-button ng-click="close()">Close</md-button>
+       
+           
+
+        <div ng-repeat="item in menus">
+            <md-menu-item>
+            <md-button ng-if="item.type==='link'" ui-sref="{{item.url}}">
+                  {{item.menu}}
+            </md-button>
+             <h3 ng-if="item.type==='toogle'">{{item.menu}}</h3>    
+             
+            </md-menu-item>
+        </div>
+        <md
+        
+        <md-content layout="column">
+          
+     
+        </md-content>
+    </md-sidenav>
+    
+     <div id="content" ui-view>loading</div>
+
+
+</section>
+</div>
+<!--
+Copyright 2016 Google Inc. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that can be foundin the LICENSE file at http://material.angularjs.org/HEAD/license.
+-->
+</body>
+</html>
